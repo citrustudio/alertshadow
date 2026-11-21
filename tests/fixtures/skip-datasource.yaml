@@ -1,0 +1,24 @@
+uid: skip-datasource
+condition: B
+for: 2m
+labels:
+  severity: warning
+data:
+- refId: A
+  datasourceUid: logs
+  model:
+    expr: service_ready == bool 0
+- refId: B
+  datasourceUid: __expr__
+  model:
+    type: classic_conditions
+    conditions:
+    - query:
+        params:
+        - A
+      reducer:
+        type: last
+      evaluator:
+        type: gt
+        params:
+        - 0

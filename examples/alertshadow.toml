@@ -1,0 +1,9 @@
+rules = ["rules/*.yaml"]
+out = "generated"
+fixtures = ["fixtures/*.yaml"]
+strict = true
+env = []
+
+[datasources]
+metrics = "prometheus"
+logs = "skip"

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alertshadow"
+version = "0.1.0"
+description = "Offline Prometheus test shadows for Grafana-managed rules"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6.0.3,<7"]
+
+license = "Apache-2.0"
+readme = "README.md"
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+alertshadow = "alertshadow.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["alertshadow*"]

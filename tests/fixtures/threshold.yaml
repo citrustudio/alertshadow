@@ -1,0 +1,31 @@
+uid: threshold
+condition: B
+for: 2m
+labels:
+  severity: warning
+data:
+- refId: A
+  datasourceUid: metrics
+  model:
+    expr: service_ready == bool 0
+- refId: R
+  datasourceUid: __expr__
+  model:
+    type: reduce
+    reducer: last
+    expression: A
+- refId: B
+  datasourceUid: __expr__
+  model:
+    type: threshold
+    conditions:
+    - query:
+        params:
+        - A
+      reducer:
+        type: last
+      evaluator:
+        type: gt
+        params:
+        - 0
+    expression: R

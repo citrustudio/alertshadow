@@ -1,0 +1,26 @@
+rule_files:
+- ../generated/rules/value.yaml
+evaluation_interval: 1m
+tests:
+- interval: 1m
+  input_series:
+  - series: service_ready
+    values: 1 1 1 1 1
+  alert_rule_test:
+  - eval_time: 4m
+    alertname: ValueAlert
+    exp_alerts: []
+- interval: 1m
+  input_series:
+  - series: service_ready
+    values: 0 0 0 0 0
+  alert_rule_test:
+  - eval_time: 1m
+    alertname: ValueAlert
+    exp_alerts: []
+  - eval_time: 3m
+    alertname: ValueAlert
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+      exp_annotations: {}
